@@ -28,4 +28,31 @@ function getCalculations() {
         })
 }
 
+function postCalculation(event) {
+    event.preventDefault();
+
+    //Defining each part of a calculation submission
+    let firstNum = document.querySelector('#firstNum');
+    let operator = SOMETHINGIDKLOL;
+    let secondNum = document.querySelector('#secondNum');
+
+    let entryData = [{
+        item: itemInput.value,
+        description: descriptionInput.value
+        }]
+
+    axios.post('/inventory', entryData)
+    .then((response) => {
+        getInventory();
+        //Clearing out input fields upon successful entry
+        itemInput.value = '';
+        descriptionInput.value = '';
+    })
+    .catch ((error) => {
+        console.log('Oh no POST method failed');
+        //QUESTION FOR GRADER: WHAT WOULD BE A HELPFUL ERROR MESSAGE THINGY TO PUT HERE? THANKS!
+    })
+
+}
+
 getCalculations();

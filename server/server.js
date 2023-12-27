@@ -8,18 +8,7 @@ app.use(express.static('server/public'));
 // Global variable that will contain all of the
 // calculation objects:
 let calculations = [
-  {
-    numOne: 3,
-    numTwo: 5,
-    operator: '+',
-    result: 8
-  },
-  {
-    numOne: 11,
-    numTwo: 7,
-    operator: '-',
-    result: 4
-  }
+
 ]
 
 
