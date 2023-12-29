@@ -2,6 +2,7 @@ console.log('client.js is sourced!');
 
 //Defining global variables
 let calcHistory = document.querySelector('#calcHistory');
+let recentResult = document.querySelector('#recentResult');
 
 //Functions and variables needed to populate the 'operator' property in the object being sent in POST route
 let operatorArray = []
@@ -28,7 +29,7 @@ function getDividedByOperator() {
 //-------------------------------------------------------------------------------------
 
 //Defining global functions
-function renderCalculations(calcArray) {
+function renderCalculationsHistory(calcArray) {
     calcHistory.innerHTML = '';
     for (let calc of calcArray) {
         calcHistory.innerHTML += `
@@ -38,6 +39,12 @@ function renderCalculations(calcArray) {
     console.log('List of all calculations:', calcArray);
 }
 
+function renderRecentResult(calcArray) {
+    recentResult.innerHTML = '';
+    let mostRecentResult = calcArray[calcArray.length-1].result;
+    recentResult.innerHTML = mostRecentResult;
+}
+
 function getCalculations() {
     axios({
         method:'GET',
@@ -45,7 +52,8 @@ function getCalculations() {
       })
         .then (function (response) {
             console.log('GET Response:', response.data);
-            renderCalculations(response.data);
+            renderCalculationsHistory(response.data);
+            renderRecentResult(response.data);
         })
         .catch ((error) => {
             console.error('GET Error:', error);
