@@ -74,17 +74,21 @@ function postCalculation(event) {
         operator: currentOperator
         }]
 
-    axios.post('/calculations', calcSubmissionData)
-    .then((response) => {
-        getCalculations();
-        //Clearing out input fields upon successful entry
-        firstNum.value = '';
-        secondNum.value = '';
+    axios({
+        method: 'POST',
+        url: '/calculations',
+        data: calcSubmissionData
     })
-    .catch ((error) => {
-        console.log('Oh no POST method failed');
-        //QUESTION FOR GRADER: WHAT WOULD BE A HELPFUL ERROR MESSAGE THINGY TO PUT HERE? THANKS!
-    })
+        .then((response) => {
+            getCalculations();
+            //Clearing out input fields upon successful entry
+            firstNum.value = '';
+            secondNum.value = '';
+        })
+        .catch ((error) => {
+            console.log('Oh no POST method failed');
+            //QUESTION FOR GRADER: WHAT WOULD BE A HELPFUL ERROR MESSAGE THINGY TO PUT HERE? THANKS!
+        })
 
 }
 
