@@ -3,6 +3,30 @@ console.log('client.js is sourced!');
 //Defining global variables
 let calcHistory = document.querySelector('#calcHistory');
 
+//Functions and variables needed to populate the 'operator' property in the object being sent in POST route
+let operatorArray = []
+
+function getPlusOperator() {
+    operatorArray.push('+')
+    console.log(operatorArray);
+}
+
+function getMinusOperator() {
+    operatorArray.push('-')
+    console.log(operatorArray);
+}
+
+function getTimesOperator() {
+    operatorArray.push('*')
+    console.log(operatorArray);
+}
+
+function getDividedByOperator() {
+    operatorArray.push('/')
+    console.log(operatorArray);
+}
+//-------------------------------------------------------------------------------------
+
 //Defining global functions
 function renderCalculations(calcArray) {
     calcHistory.innerHTML = '';
@@ -33,20 +57,21 @@ function postCalculation(event) {
 
     //Defining each part of a calculation submission
     let firstNum = document.querySelector('#firstNum');
-    let operator = SOMETHINGIDKLOL;
     let secondNum = document.querySelector('#secondNum');
+    let currentOperator = operatorArray[operatorArray.length-1]
 
-    let entryData = [{
-        item: itemInput.value,
-        description: descriptionInput.value
+    let calcSubmissionData = [{
+        numOne: Number(firstNum.value),
+        numTwo: Number(secondNum.value),
+        operator: currentOperator
         }]
 
-    axios.post('/inventory', entryData)
+    axios.post('/calculations', calcSubmissionData)
     .then((response) => {
-        getInventory();
+        getCalculations();
         //Clearing out input fields upon successful entry
-        itemInput.value = '';
-        descriptionInput.value = '';
+        firstNum.value = '';
+        secondNum.value = '';
     })
     .catch ((error) => {
         console.log('Oh no POST method failed');

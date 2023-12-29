@@ -7,9 +7,7 @@ app.use(express.static('server/public'));
 
 // Global variable that will contain all of the
 // calculation objects:
-let calculations = [
-
-]
+let calculations = []
 
 
 // Here's a wonderful place to make some routes:
@@ -21,10 +19,48 @@ app.get('/calculations', (req,res) => {
 
 // POST /calculations
 app.post('/calculations', (req, res) => {
-  
-  
   for (let object of req.body) {
-    calculations.push(object);
+    if (object.operator === "+") {
+      let answer = object.numOne + object.numTwo;
+      let newCalc = {
+        numOne: object.numOne,
+        numTwo: object.numTwo,
+        operator: object.operator,
+        result: answer
+      }
+      calculations.push(newCalc)
+    } else
+    if (object.operator === "-") {
+      let answer = object.numOne - object.numTwo;
+      let newCalc = {
+        numOne: object.numOne,
+        numTwo: object.numTwo,
+        operator: object.operator,
+        result: answer
+      }
+      calculations.push(newCalc)
+    } else
+    if (object.operator === "*") {
+      let answer = object.numOne * object.numTwo;
+      let newCalc = {
+        numOne: object.numOne,
+        numTwo: object.numTwo,
+        operator: object.operator,
+        result: answer
+      }
+      calculations.push(newCalc)
+    } else
+    if (object.operator === "/") {
+      let answer = object.numOne / object.numTwo;
+      let newCalc = {
+        numOne: object.numOne,
+        numTwo: object.numTwo,
+        operator: object.operator,
+        result: answer
+      }
+      calculations.push(newCalc)
+    }
+
   }
   res.sendStatus(201);
   console.log('Submitted calculations:', calculations);

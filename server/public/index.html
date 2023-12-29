@@ -12,10 +12,18 @@
 
     <form data-testid="calculator" autocomplete="off" onSubmit="postCalculation(event)">
       <input id="firstNum" placeholder="First Number" required>
-      <button type="button">+</button>
-      <button type="button">-</button>
-      <button type="button">*</button>
-      <button type="button">/</button>
+      <!-- <input type="radio" id="add" name="operators" value="+">
+      <label for="add">+</label>
+      <input type="radio" id="subtract" name="operators" value="-">
+      <label for="subtract">-</label>
+      <input type="radio" id="multiply" name="operators" value="*">
+      <label for="multiply">*</label>
+      <input type="radio" id="divide" name="operators" value="/">
+      <label for="divide">/</label> &nbsp; -->
+      <button type="button" id="plus" name="+" onClick="getPlusOperator(event)">+</button>
+      <button type="button" id="minus" name="-" onClick="getMinusOperator(event)">-</button>
+      <button type="button" id="times" name="*" onClick="getTimesOperator(event)">*</button>
+      <button type="button" id="dividedBy" name="/" onClick="getDividedByOperator(event)">/</button>
       <input id="secondNum" placeholder="Second Number" required>
       <button type="submit">=</button>
       <button type="reset">C</button>
